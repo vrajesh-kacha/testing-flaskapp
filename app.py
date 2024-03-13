@@ -1,9 +1,10 @@
 from flask import Flask, request,jsonify
 import pickle
 import numpy as np
+from flask_cors import CORS
 model=pickle.load(open("pipeline.pkl","rb"))
 app=Flask(__name__)
-
+CORS(app)
 @app.route("/")
 def home():
     return "This is flask api"
