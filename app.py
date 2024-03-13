@@ -7,7 +7,7 @@ app=Flask(__name__)
 CORS(app)
 @app.route("/")
 def home():
-    return "This is flask api"
+    return jsonify({"key":"This is flask api"})
 
 @app.route("/predict",methods=['POST'])
 def predict():
