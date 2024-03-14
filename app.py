@@ -2,7 +2,6 @@ from flask import Flask, request,jsonify
 import pickle
 import numpy as np
 from flask_cors import CORS
-model=pickle.load(open("pipeline.pkl","rb"))
 app=Flask(__name__)
 CORS(app)
 @app.route("/")
@@ -26,6 +25,6 @@ def predict():
     Gpu_Brand=request.form.get("Gpu_Brand")	
     Os=request.form.get("Os")
     input_query=np.array([[Company,TypeName,Inches,Ram,Weight,Touchscreen,ips,X_res,Y_res,Cpu_brand,HDD,SSD,Gpu_Brand,Os]])
-    price=np.exp((model.predict(input_query)[0]))
-    return jsonify({"price":price})
+    model=pickle.load(open("pipeline.pkl","rb"))
+    return jsonify({"price": np.exp((model.predict(input_query)[0]))})
 
